@@ -1,0 +1,28 @@
+{
+  "todoos": [
+    {
+      "userId": 10,
+      "title": "Сделать уборку ",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "userId": 10,
+      "title": "Найти детали ",
+      "completed": false,
+      "id": 2
+    },
+    {
+      "userId": 10,
+      "title": "Реализовать соритровку ",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "userId": 10,
+      "title": "проситать про дебаунс",
+      "completed": false,
+      "id": 4
+    }
+  ]
+}
