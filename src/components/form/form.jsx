@@ -10,6 +10,7 @@ export const Form = ({
 }) => {
   const [task, setTask] = useState("");
   const [searchValue, setSearchValue] = useState("");
+  const [isSorted, setIsSorted] = useState(false);
 
   const debouncedSearch = useDebounce(searchValue, 500);
 
@@ -24,15 +25,20 @@ export const Form = ({
     creatNewTask(refreshTask, setRefreshTask, task);
     setTask("");
   };
+  useEffect(() => {
+    let updatedList = [...toDoList];
 
-  const sort = () => {
-    const sorted = [...toDoList].sort((a, b) => a.title.localeCompare(b.title));
-    return setFilteredList(sorted);
-  };
+    if (isSorted) {
+      updatedList.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    setFilteredList(updatedList);
+  }, [toDoList, isSorted]);
 
   return (
     <FormLayout
-      sort={sort}
+      setIsSorted={setIsSorted}
+      isSorted={isSorted}
       searchValue={searchValue}
       onSubmit={onSubmit}
       setSearchValue={setSearchValue}

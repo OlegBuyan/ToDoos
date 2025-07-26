@@ -11,3 +11,9 @@
   width: 200px;
   text-align: center;
 }
+.red {
+  background-color: red;
+}
+.red:hover {
+  background-color: rgb(151, 0, 0);
+}

@@ -7,7 +7,8 @@ export const FormLayout = ({
   setTask,
   setSearchValue,
   searchValue,
-  sort,
+  setIsSorted,
+  isSorted,
 }) => {
   return (
     <>
@@ -37,8 +38,12 @@ export const FormLayout = ({
           >
             {"Найти задачу"}
           </Input>
-          <Button type={"button"} onClick={sort}>
-            {"Сортировать"}
+          <Button
+            className={isSorted ? styles.red : ""}
+            type={"button"}
+            onClick={() => setIsSorted(!isSorted)}
+          >
+            {isSorted ? "Сбросить сортировку" : "Сортировать"}
           </Button>
         </div>
       </form>

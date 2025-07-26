@@ -24,15 +24,6 @@ function App() {
     };
 
     fetchData();
-    // fetch(TODOOS)
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw Error("Ошибочка");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => setToDoList(data))
-    //   .catch((error) => console.log(error));
   }, [refreshTask]);
   return (
     <>
