@@ -1,4 +1,4 @@
-import { TODOOS } from "../../constant";
+import { TODOOS } from "../components/shared/constant";
 export const creatNewTask = (refreshTask, setRefreshTask, task) => {
   fetch(TODOOS, {
     method: "POST",

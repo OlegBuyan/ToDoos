@@ -1,4 +1,4 @@
-import { TODOOS } from "../../constant";
+import { TODOOS } from "../components/shared/constant";
 export const deleteTask = (id, refreshTask, setRefreshTask) => {
   fetch(`${TODOOS}/${id}`, {
     method: "DELETE",

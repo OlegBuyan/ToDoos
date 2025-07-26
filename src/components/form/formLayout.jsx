@@ -1,4 +1,5 @@
 import styles from "./form.module.css";
+import { Button, Input } from "../shared/components";
 
 export const FormLayout = ({
   onSubmit,
@@ -12,28 +13,34 @@ export const FormLayout = ({
     <>
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.container}>
-          <label htmlFor="createFiled">{"Create task"}</label>
-          <input
+          <Input
+            htmlFor={"createFiled"}
+            placeholder={"Создать задачу"}
             type="text"
             name="createFiled"
             value={task}
             onChange={({ target }) => setTask(target.value)}
-          />
-          <button type="submit">{"Создать"}</button>
+          >
+            {"Создать задачу "}
+          </Input>
+
+          <Button type={"submit"}>{"Создать"}</Button>
         </div>
         <div className={styles.container}>
-          <label htmlFor="search">{"Search"}</label>
-
-          <input
-            value={searchValue}
-            onChange={({ target }) => setSearchValue(target.value)}
+          <Input
+            htmlFor={"search"}
+            placeholder={"Найти задачу"}
             type="search"
             name="search"
-          />
+            value={searchValue}
+            onChange={({ target }) => setSearchValue(target.value)}
+          >
+            {"Найти задачу"}
+          </Input>
+          <Button type={"button"} onClick={sort}>
+            {"Сортировать"}
+          </Button>
         </div>
-        <button type="button" onClick={sort}>
-          {"Сортировать"}
-        </button>
       </form>
     </>
   );

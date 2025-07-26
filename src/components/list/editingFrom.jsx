@@ -1,4 +1,5 @@
 import styles from "./todolist.module.css";
+import { Button, Input } from "../shared/components";
 
 export const EditingForm = ({
   closeEditer,
@@ -11,16 +12,23 @@ export const EditingForm = ({
     <>
       <div onClick={closeEditer} className={styles.modalBackground}></div>
       <div className={styles.editForm}>
-        <label htmlFor="edit">{"Внесите изменения"}</label>
-        <input
-          name="edit"
+        <Input
+          htmlFor={"edit"}
           type="text"
+          name="edit"
           value={value}
           onChange={({ target }) => setEditedTaskValue(target.value)}
-        />
+        >
+          {"Внесите изменения"}
+        </Input>
+
         <div className={styles.editForm__buttons}>
-          <button onClick={edit}>{"Сохранить"}</button>
-          <button onClick={closeEditer}>{"Отмена"}</button>
+          <Button className={styles.green} onClick={edit}>
+            {"Сохранить"}
+          </Button>
+          <Button className={styles.red} onClick={closeEditer}>
+            {"Отмена"}
+          </Button>
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
 import { TodolistLayout } from "./todolistLayout";
-import { deleteTask, editTask } from "../crud";
+import { deleteTask, editTask } from "../../utils";
 import { useState } from "react";
 import { EditingForm } from "./editingFrom";
 
 export const Todolist = ({
-  toDoList,
+  isLoading,
   setRefreshTask,
   refreshTask,
   filteredList,
@@ -32,11 +32,14 @@ export const Todolist = ({
 
   return (
     <>
-      <TodolistLayout
-        filteredList={filteredList}
-        onClick={onClick}
-        callForm={callForm}
-      />
+      {
+        <TodolistLayout
+          isLoading={isLoading}
+          filteredList={filteredList}
+          onClick={onClick}
+          callForm={callForm}
+        />
+      }
       {editingTask && (
         <EditingForm
           edit={edit}
