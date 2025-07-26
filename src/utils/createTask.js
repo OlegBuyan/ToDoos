@@ -9,9 +9,15 @@ export const creatNewTask = (refreshTask, setRefreshTask, task) => {
       completed: false,
     }),
   })
-    .then((response) => response.json())
-    .then((response) => {
-      console.log("Задача добавлена", response);
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Данные не получен`);
+      }
+      res.json();
+    })
+    .then((res) => {
+      console.log("Задача добавлена", res);
       setRefreshTask(!refreshTask);
-    });
+    })
+    .catch((error) => console.error(error));
 };

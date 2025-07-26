@@ -12,6 +12,12 @@ export const editTask = (
       title: editedTaskValue,
     }),
   })
-    .then((res) => res.json())
-    .then(() => setRefreshTask(!refreshTask));
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Данные не получен`);
+      }
+      res.json();
+    })
+    .then(() => setRefreshTask(!refreshTask))
+    .catch((error) => console.error(error));
 };
