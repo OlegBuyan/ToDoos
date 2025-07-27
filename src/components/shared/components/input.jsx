@@ -9,12 +9,14 @@ export const Input = ({
   onChange,
   children,
   className,
+  required,
   placeholder,
 }) => {
   return (
     <>
       <label htmlFor={htmlFor}>{children}</label>
       <input
+        required={required}
         placeholder={placeholder}
         className={clsx(styles.sharedInput, className)}
         type={type}

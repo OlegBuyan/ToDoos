@@ -22,7 +22,11 @@ export const TodolistLayout = ({
               >
                 {"Изменить"}
               </Button>
-              <Button className={styles.red} onClick={() => onClick(id)}>
+              <Button
+                className={styles.red}
+                disabled={isLoading}
+                onClick={() => onClick(id)}
+              >
                 {"Удалить"}
               </Button>
             </div>

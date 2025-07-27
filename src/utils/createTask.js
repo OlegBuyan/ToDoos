@@ -15,8 +15,8 @@ export const creatNewTask = (refreshTask, setRefreshTask, task) => {
       }
       res.json();
     })
-    .then((res) => {
-      console.log("Задача добавлена", res);
+    .then(() => {
+      console.log("Задача добавлена");
       setRefreshTask(!refreshTask);
     })
     .catch((error) => console.error(error));
