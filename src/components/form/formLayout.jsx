@@ -15,6 +15,7 @@ export const FormLayout = ({
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.container}>
           <Input
+            required
             htmlFor={"createFiled"}
             placeholder={"Создать задачу"}
             type="text"

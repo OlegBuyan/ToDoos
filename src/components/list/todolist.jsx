@@ -10,7 +10,6 @@ export const Todolist = ({
 }) => {
   const [editingTask, setEditingTask] = useState(null);
   const [editedTaskValue, setEditedTaskValue] = useState("");
-  const [refresh, setRefresh] = useState(true);
 
   const onClick = (id) => {
     deleteTask(id);
