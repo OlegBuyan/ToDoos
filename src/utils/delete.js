@@ -1,17 +1,11 @@
-import { TODOOS } from "../components/shared/constant";
-export const deleteTask = (id, refreshTask, setRefreshTask) => {
-  fetch(`${TODOOS}/${id}`, {
-    method: "DELETE",
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Данные не получен`);
-      }
-      res.json();
-    })
+import { ref, remove } from "firebase/database";
+import { db } from "../data/firebase";
+
+export const deleteTask = (id) => {
+  const todosDbRef = ref(db, `todos/${id}`);
+  remove(todosDbRef)
     .then(() => {
-      console.log("Задача удалена");
-      setRefreshTask(!refreshTask);
+      console.log(`Задача удалена${id}`);
     })
-    .catch((error) => console.error(error));
+    .catch(() => console.error("error"));
 };

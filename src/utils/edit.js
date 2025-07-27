@@ -1,23 +1,12 @@
-import { TODOOS } from "../components/shared/constant";
-export const editTask = (
-  editingTask,
-  editedTaskValue,
-  setRefreshTask,
-  refreshTask
-) => {
-  fetch(`${TODOOS}/${editingTask}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify({
-      title: editedTaskValue,
-    }),
+import { ref, update } from "firebase/database";
+import { db } from "../data/firebase";
+
+export const editTask = (editingTask, editedTaskValue) => {
+  const todosDbRef = ref(db, `todos/${editingTask}`);
+
+  update(todosDbRef, {
+    title: editedTaskValue,
   })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Данные не получен`);
-      }
-      res.json();
-    })
-    .then(() => setRefreshTask(!refreshTask))
-    .catch((error) => console.error(error));
+    .then(() => console.log("Данные обновлены"))
+    .catch(() => console.error("error"));
 };

@@ -5,15 +5,14 @@ import { EditingForm } from "./editingFrom";
 
 export const Todolist = ({
   isLoading,
-  setRefreshTask,
-  refreshTask,
+
   filteredList,
 }) => {
   const [editingTask, setEditingTask] = useState(null);
   const [editedTaskValue, setEditedTaskValue] = useState("");
 
   const onClick = (id) => {
-    deleteTask(id, refreshTask, setRefreshTask);
+    deleteTask(id);
   };
 
   const callForm = (id, title) => {
@@ -26,7 +25,7 @@ export const Todolist = ({
   };
 
   const edit = () => {
-    editTask(editingTask, editedTaskValue, setRefreshTask, refreshTask);
+    editTask(editingTask, editedTaskValue);
     closeEditer();
   };
 

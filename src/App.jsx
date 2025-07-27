@@ -1,35 +1,28 @@
-import { TODOOS } from "./components/shared/constant";
 import { useEffect, useState } from "react";
 import { Todolist, Form } from "./components";
+import { ref, onValue } from "firebase/database";
+import { db } from "./data/firebase";
+import { fireBaseParser } from "./utils";
+
 function App() {
-  const [toDoList, setToDoList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [refreshTask, setRefreshTask] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [toDoList, setToDoList] = useState({});
+  const [filteredList, setFilteredList] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(TODOOS);
-        if (!response.ok) throw new Error("Ошибочка");
-        const data = await response.json();
-        setToDoList(data);
-        setFilteredList(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    const todosDbRef = ref(db, "todos");
 
-    fetchData();
-  }, [refreshTask]);
+    return onValue(todosDbRef, (snapshot) => {
+      const loadedTodos = snapshot.val();
+      const parsedData = fireBaseParser(loadedTodos);
+      setToDoList(parsedData);
+      setFilteredList(parsedData);
+      setIsLoading(false);
+    });
+  }, []);
   return (
     <>
       <Form
-        setRefreshTask={setRefreshTask}
-        refreshTask={refreshTask}
         toDoList={toDoList}
         setToDoList={setToDoList}
         filteredList={filteredList}
@@ -39,8 +32,6 @@ function App() {
         isLoading={isLoading}
         filteredList={filteredList}
         toDoList={toDoList}
-        setRefreshTask={setRefreshTask}
-        refreshTask={refreshTask}
       />
     </>
   );

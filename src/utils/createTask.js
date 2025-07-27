@@ -1,23 +1,13 @@
-import { TODOOS } from "../components/shared/constant";
-export const creatNewTask = (refreshTask, setRefreshTask, task) => {
-  fetch(TODOOS, {
-    method: "POST",
-    headers: { "Content-Type": "application/json;charset=utf-8" },
-    body: JSON.stringify({
-      userId: 10,
-      title: task,
-      completed: false,
-    }),
+import { ref, push } from "firebase/database";
+import { db } from "../data/firebase";
+export const creatNewTask = (task) => {
+  const todosDbRef = ref(db, "todos");
+  push(todosDbRef, {
+    title: task,
+    completed: false,
   })
     .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Данные не получен`);
-      }
-      res.json();
+      console.log("Задача добавлена");
     })
-    .then((res) => {
-      console.log("Задача добавлена", res);
-      setRefreshTask(!refreshTask);
-    })
-    .catch((error) => console.error(error));
+    .catch(() => console.error("Ошибка"));
 };

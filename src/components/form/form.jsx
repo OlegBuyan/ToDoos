@@ -2,12 +2,7 @@ import { FormLayout } from "./formLayout";
 import { useState, useEffect } from "react";
 import { creatNewTask } from "../../utils/createTask";
 import { find, useDebounce } from "../../utils";
-export const Form = ({
-  setRefreshTask,
-  refreshTask,
-  toDoList,
-  setFilteredList,
-}) => {
+export const Form = ({ toDoList, setFilteredList }) => {
   const [task, setTask] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [isSorted, setIsSorted] = useState(false);
@@ -22,16 +17,16 @@ export const Form = ({
 
   const onSubmit = (event) => {
     event.preventDefault();
-    creatNewTask(refreshTask, setRefreshTask, task);
+    creatNewTask(task);
     setTask("");
   };
   useEffect(() => {
-    let updatedList = [...toDoList];
+    if (!toDoList) return;
+    let updatedList = Object.values(toDoList);
 
     if (isSorted) {
       updatedList.sort((a, b) => a.title.localeCompare(b.title));
     }
-
     setFilteredList(updatedList);
   }, [toDoList, isSorted]);
 
