@@ -6,23 +6,35 @@
   justify-content: center;
 }
 .item {
+  display: block;
   margin-top: 5px;
   border-radius: 5px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.1);
   font-weight: 700;
-  padding: 10px;
-  min-width: 600px;
+  width: 80%;
   list-style-type: none;
-  text-align: left;
   cursor: pointer;
   transition: 1s;
+  text-align: left;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .item:hover {
   transform: scale(1.02);
 }
+.link {
+  padding: 10px;
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  color: black;
+}
+.link:active {
+  color: black;
+}
+
 .editForm {
   position: fixed;
   top: 50%;
@@ -82,4 +94,35 @@ div .green:hover {
   100% {
     transform: rotate(360deg);
   }
+}
+.TodoItem {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  padding: 10px;
+  width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+  gap: 100px;
+  padding: 30px;
+}
+.backWard {
+  width: 80px;
+  text-align: center;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 5px;
 }

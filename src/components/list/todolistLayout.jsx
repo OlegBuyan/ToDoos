@@ -1,38 +1,16 @@
+import { Link } from "react-router-dom";
 import styles from "./todolist.module.css";
-import { Button } from "../shared/components";
 
-export const TodolistLayout = ({
-  filteredList,
-  onClick,
-  callForm,
-  isLoading,
-}) => {
+export const TodolistLayout = ({ filteredList }) => {
   return (
     <ul className={styles.list}>
-      {isLoading ? (
-        <div className={styles.loader}></div>
-      ) : (
-        filteredList.map(({ id, title }) => (
-          <li className={styles.item} key={id}>
+      {filteredList.map(({ id, title }) => (
+        <li key={id} className={styles.item}>
+          <Link to={`/${id}`} className={styles.link}>
             {title}
-            <div>
-              <Button
-                className={styles.green}
-                onClick={() => callForm(id, title)}
-              >
-                {"Изменить"}
-              </Button>
-              <Button
-                className={styles.red}
-                disabled={isLoading}
-                onClick={() => onClick(id)}
-              >
-                {"Удалить"}
-              </Button>
-            </div>
-          </li>
-        ))
-      )}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };
