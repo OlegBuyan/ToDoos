@@ -1,12 +1,11 @@
 import styles from "./todolist.module.css";
 import { Button } from "../shared/components";
+import { useContext } from "react";
+import { AppContext } from "../../utils";
 
-export const TodolistLayout = ({
-  filteredList,
-  onClick,
-  callForm,
-  isLoading,
-}) => {
+export const TodolistLayout = ({ onClick, callForm, isLoading }) => {
+  const { filteredList } = useContext(AppContext);
+
   return (
     <ul className={styles.list}>
       {isLoading ? (

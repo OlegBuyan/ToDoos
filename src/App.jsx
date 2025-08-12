@@ -1,6 +1,7 @@
 import { TODOOS } from "./components/shared/constant";
 import { useEffect, useState } from "react";
 import { Todolist, Form } from "./components";
+import { AppContext } from "./utils";
 function App() {
   const [toDoList, setToDoList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -27,21 +28,27 @@ function App() {
   }, [refreshTask]);
   return (
     <>
-      <Form
-        setRefreshTask={setRefreshTask}
-        refreshTask={refreshTask}
-        toDoList={toDoList}
-        setToDoList={setToDoList}
-        filteredList={filteredList}
-        setFilteredList={setFilteredList}
-      />
-      <Todolist
-        isLoading={isLoading}
-        filteredList={filteredList}
-        toDoList={toDoList}
-        setRefreshTask={setRefreshTask}
-        refreshTask={refreshTask}
-      />
+      <AppContext.Provider
+        value={{
+          filteredList,
+        }}
+      >
+        <Form
+          setRefreshTask={setRefreshTask}
+          refreshTask={refreshTask}
+          toDoList={toDoList}
+          setToDoList={setToDoList}
+          filteredList={filteredList}
+          setFilteredList={setFilteredList}
+        />
+        <Todolist
+          isLoading={isLoading}
+          filteredList={filteredList}
+          toDoList={toDoList}
+          setRefreshTask={setRefreshTask}
+          refreshTask={refreshTask}
+        />
+      </AppContext.Provider>
     </>
   );
 }

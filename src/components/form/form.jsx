@@ -1,17 +1,16 @@
 import { FormLayout } from "./formLayout";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { creatNewTask } from "../../utils/createTask";
 import { find, useDebounce } from "../../utils";
 export const Form = ({
-  setRefreshTask,
-  refreshTask,
   toDoList,
   setFilteredList,
+  setRefreshTask,
+  refreshTask,
 }) => {
   const [task, setTask] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [isSorted, setIsSorted] = useState(false);
-
   const debouncedSearch = useDebounce(searchValue, 500);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export const Form = ({
 
   const onSubmit = (event) => {
     event.preventDefault();
-    creatNewTask(refreshTask, setRefreshTask, task);
+    creatNewTask(task, setRefreshTask, refreshTask);
     setTask("");
   };
   useEffect(() => {

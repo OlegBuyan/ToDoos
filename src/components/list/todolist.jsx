@@ -1,16 +1,12 @@
 import { TodolistLayout } from "./todolistLayout";
-import { deleteTask, editTask } from "../../utils";
-import { useState } from "react";
+import { deleteTask, editTask, AppContext } from "../../utils";
+import { useState, useContext } from "react";
 import { EditingForm } from "./editingFrom";
 
-export const Todolist = ({
-  isLoading,
-  setRefreshTask,
-  refreshTask,
-  filteredList,
-}) => {
+export const Todolist = ({ isLoading, setRefreshTask, refreshTask }) => {
   const [editingTask, setEditingTask] = useState(null);
   const [editedTaskValue, setEditedTaskValue] = useState("");
+  const { filteredList } = useContext(AppContext);
 
   const onClick = (id) => {
     deleteTask(id, refreshTask, setRefreshTask);

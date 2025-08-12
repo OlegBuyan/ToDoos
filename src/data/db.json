@@ -2,21 +2,9 @@
   "todoos": [
     {
       "userId": 10,
-      "title": "11",
+      "title": "123123",
       "completed": false,
       "id": 1
-    },
-    {
-      "userId": 10,
-      "title": "раз два ",
-      "completed": false,
-      "id": 2
-    },
-    {
-      "userId": 10,
-      "title": "Привет как дела",
-      "completed": false,
-      "id": 3
     }
   ]
 }

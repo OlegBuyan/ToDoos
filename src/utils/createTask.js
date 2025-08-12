@@ -1,5 +1,5 @@
 import { TODOOS } from "../components/shared/constant";
-export const creatNewTask = (refreshTask, setRefreshTask, task) => {
+export const creatNewTask = (task, setRefreshTask, refreshTask) => {
   fetch(TODOOS, {
     method: "POST",
     headers: { "Content-Type": "application/json;charset=utf-8" },
@@ -16,8 +16,8 @@ export const creatNewTask = (refreshTask, setRefreshTask, task) => {
       res.json();
     })
     .then(() => {
-      console.log("Задача добавлена");
       setRefreshTask(!refreshTask);
+      console.log("Задача добавлена");
     })
     .catch((error) => console.error(error));
 };
