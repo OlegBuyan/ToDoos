@@ -4,7 +4,7 @@ import { find, useDebounce } from "../../utils";
 import { createTodoos } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
-export const Form = ({ todoos, todoosParser, setTodoosParcer }) => {
+export const Form = ({ todoosParcer, setTodoosParcer, todoos }) => {
   const [task, setTask] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [isSorted, setIsSorted] = useState(false);
@@ -23,14 +23,14 @@ export const Form = ({ todoos, todoosParser, setTodoosParcer }) => {
     setTask("");
   };
   useEffect(() => {
-    let updatedList = [...todoos];
+    let updatedList = [...todoosParcer];
 
     if (isSorted) {
       updatedList.sort((a, b) => a.title.localeCompare(b.title));
-    }
+    } else updatedList = todoos;
 
     setTodoosParcer(updatedList);
-  }, [todoos, isSorted]);
+  }, [isSorted]);
 
   return (
     <FormLayout

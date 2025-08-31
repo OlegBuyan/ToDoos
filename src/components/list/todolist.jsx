@@ -4,19 +4,21 @@ import { EditingForm } from "./editingFrom";
 import { Form } from "../form/form";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTodoos, fetchTodoos, editTodoos } from "../../redux/actions";
+import { store } from "../../redux/store";
 
 export const Todolist = () => {
   const [editingTask, setEditingTask] = useState(null);
   const [editedTaskValue, setEditedTaskValue] = useState("");
+  const [todoosParcer, setTodoosParcer] = useState([]);
   const dispatch = useDispatch();
   const todoos = useSelector((state) => state.todoos);
-  const loading = useSelector((state) => state.loading);
-  const [todoosParser, setTodoosParcer] = useState([]);
-
   useEffect(() => {
     dispatch(fetchTodoos());
+  }, [dispatch]);
+
+  useEffect(() => {
     setTodoosParcer(todoos);
-  }, [dispatch, todoos]);
+  }, [todoos]);
 
   const deleteItem = (id) => {
     dispatch(deleteTodoos(id));
@@ -39,20 +41,19 @@ export const Todolist = () => {
   return (
     <>
       <Form
-        todoos={todoos}
-        todoosParser={todoosParser}
+        todoosParcer={todoosParcer}
         setTodoosParcer={setTodoosParcer}
+        todoos={todoos}
       />
       {
         <TodolistLayout
-          loading={loading}
-          todoosParser={todoosParser}
+          todoosParcer={todoosParcer}
           deleteItem={deleteItem}
           callForm={callForm}
         />
       }
 
-      {editingTask && (
+      {
         <EditingForm
           edit={edit}
           editedTaskValue={editedTaskValue}
@@ -61,7 +62,7 @@ export const Todolist = () => {
           editingTask={editingTask}
           setEditingTask={setEditingTask}
         />
-      )}
+      }
     </>
   );
 };

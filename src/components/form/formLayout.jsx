@@ -9,6 +9,7 @@ export const FormLayout = ({
   searchValue,
   setIsSorted,
   isSorted,
+  sorted,
 }) => {
   return (
     <>

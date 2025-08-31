@@ -1,4 +1,5 @@
 import { TODOOS } from "../../components/shared/constant";
+import { fetchTodoos } from "./fetchTodoos";
 
 export const deleteTodoos = (id) => async (dispatch) => {
   try {
@@ -9,4 +10,5 @@ export const deleteTodoos = (id) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+  await dispatch(fetchTodoos());
 };

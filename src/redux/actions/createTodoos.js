@@ -1,4 +1,5 @@
 import { TODOOS } from "../../components/shared/constant";
+import { fetchTodoos } from "./fetchTodoos";
 
 export const createTodoos = (task) => async (dispatch) => {
   try {
@@ -16,4 +17,5 @@ export const createTodoos = (task) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+  await dispatch(fetchTodoos());
 };

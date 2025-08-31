@@ -7,30 +7,35 @@ export const EditingForm = ({
   editedTaskValue,
   setEditedTaskValue,
   value = editedTaskValue,
+  editingTask,
 }) => {
   return (
     <>
-      <div onClick={closeEditer} className={styles.modalBackground}></div>
-      <div className={styles.editForm}>
-        <Input
-          htmlFor={"edit"}
-          type="text"
-          name="edit"
-          value={value}
-          onChange={({ target }) => setEditedTaskValue(target.value)}
-        >
-          {"Внесите изменения"}
-        </Input>
+      {editingTask && (
+        <>
+          <div onClick={closeEditer} className={styles.modalBackground}></div>
+          <div className={styles.editForm}>
+            <Input
+              htmlFor={"edit"}
+              type="text"
+              name="edit"
+              value={value}
+              onChange={({ target }) => setEditedTaskValue(target.value)}
+            >
+              {"Внесите изменения"}
+            </Input>
 
-        <div className={styles.editForm__buttons}>
-          <Button className={styles.green} onClick={edit}>
-            {"Сохранить"}
-          </Button>
-          <Button className={styles.red} onClick={closeEditer}>
-            {"Отмена"}
-          </Button>
-        </div>
-      </div>
+            <div className={styles.editForm__buttons}>
+              <Button className={styles.green} onClick={edit}>
+                {"Сохранить"}
+              </Button>
+              <Button className={styles.red} onClick={closeEditer}>
+                {"Отмена"}
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
