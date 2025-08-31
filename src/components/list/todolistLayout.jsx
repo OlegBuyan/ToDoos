@@ -1,31 +1,30 @@
 import styles from "./todolist.module.css";
 import { Button } from "../shared/components";
+import { store } from "../../redux/store";
 
 export const TodolistLayout = ({
-  filteredList,
-  onClick,
+  deleteItem,
   callForm,
   isLoading,
+  todoosParser,
+  loading,
 }) => {
   return (
     <ul className={styles.list}>
-      {isLoading ? (
+      {loading ? (
         <div className={styles.loader}></div>
       ) : (
-        filteredList.map(({ id, title }) => (
-          <li className={styles.item} key={id}>
-            {title}
+        todoosParser.map((el) => (
+          <li className={styles.item} key={el.id}>
+            {el.title}
             <div>
-              <Button
-                className={styles.green}
-                onClick={() => callForm(id, title)}
-              >
+              <Button className={styles.green} onClick={() => callForm(el)}>
                 {"Изменить"}
               </Button>
               <Button
                 className={styles.red}
                 disabled={isLoading}
-                onClick={() => onClick(id)}
+                onClick={() => deleteItem(el.id)}
               >
                 {"Удалить"}
               </Button>

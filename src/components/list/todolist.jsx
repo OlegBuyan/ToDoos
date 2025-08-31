@@ -1,24 +1,30 @@
 import { TodolistLayout } from "./todolistLayout";
-import { deleteTask, editTask } from "../../utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EditingForm } from "./editingFrom";
+import { Form } from "../form/form";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTodoos, fetchTodoos, editTodoos } from "../../redux/actions";
 
-export const Todolist = ({
-  isLoading,
-  setRefreshTask,
-  refreshTask,
-  filteredList,
-}) => {
+export const Todolist = () => {
   const [editingTask, setEditingTask] = useState(null);
   const [editedTaskValue, setEditedTaskValue] = useState("");
+  const dispatch = useDispatch();
+  const todoos = useSelector((state) => state.todoos);
+  const loading = useSelector((state) => state.loading);
+  const [todoosParser, setTodoosParcer] = useState([]);
 
-  const onClick = (id) => {
-    deleteTask(id, refreshTask, setRefreshTask);
+  useEffect(() => {
+    dispatch(fetchTodoos());
+    setTodoosParcer(todoos);
+  }, [dispatch, todoos]);
+
+  const deleteItem = (id) => {
+    dispatch(deleteTodoos(id));
   };
 
-  const callForm = (id, title) => {
-    setEditingTask(id);
-    setEditedTaskValue(title);
+  const callForm = (task) => {
+    setEditingTask(task);
+    setEditedTaskValue(task.title);
   };
 
   const closeEditer = () => {
@@ -26,20 +32,26 @@ export const Todolist = ({
   };
 
   const edit = () => {
-    editTask(editingTask, editedTaskValue, setRefreshTask, refreshTask);
+    dispatch(editTodoos(editingTask, editedTaskValue));
     closeEditer();
   };
 
   return (
     <>
+      <Form
+        todoos={todoos}
+        todoosParser={todoosParser}
+        setTodoosParcer={setTodoosParcer}
+      />
       {
         <TodolistLayout
-          isLoading={isLoading}
-          filteredList={filteredList}
-          onClick={onClick}
+          loading={loading}
+          todoosParser={todoosParser}
+          deleteItem={deleteItem}
           callForm={callForm}
         />
       }
+
       {editingTask && (
         <EditingForm
           edit={edit}

@@ -1,39 +1,36 @@
 import { FormLayout } from "./formLayout";
 import { useState, useEffect } from "react";
-import { creatNewTask } from "../../utils/createTask";
 import { find, useDebounce } from "../../utils";
-export const Form = ({
-  setRefreshTask,
-  refreshTask,
-  toDoList,
-  setFilteredList,
-}) => {
+import { createTodoos } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+
+export const Form = ({ todoos, todoosParser, setTodoosParcer }) => {
   const [task, setTask] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [isSorted, setIsSorted] = useState(false);
-
   const debouncedSearch = useDebounce(searchValue, 500);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (debouncedSearch) {
-      setFilteredList(find(searchValue, toDoList));
+      setTodoosParcer(find(searchValue, todoos));
     }
   }, [debouncedSearch, searchValue]);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    creatNewTask(refreshTask, setRefreshTask, task);
+    dispatch(createTodoos(task));
     setTask("");
   };
   useEffect(() => {
-    let updatedList = [...toDoList];
+    let updatedList = [...todoos];
 
     if (isSorted) {
       updatedList.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    setFilteredList(updatedList);
-  }, [toDoList, isSorted]);
+    setTodoosParcer(updatedList);
+  }, [todoos, isSorted]);
 
   return (
     <FormLayout
