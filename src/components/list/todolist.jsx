@@ -1,13 +1,54 @@
-import styles from "./todolist.module.css";
+import { TodolistLayout } from "./todolistLayout";
+import { deleteTask, editTask } from "../../utils";
+import { useState } from "react";
+import { EditingForm } from "./editingFrom";
 
-export const List = ({ toDoList }) => {
+export const Todolist = ({
+  isLoading,
+
+  filteredList,
+}) => {
+  const [editingTask, setEditingTask] = useState(null);
+  const [editedTaskValue, setEditedTaskValue] = useState("");
+
+  const onClick = (id) => {
+    deleteTask(id);
+  };
+
+  const callForm = (id, title) => {
+    setEditingTask(id);
+    setEditedTaskValue(title);
+  };
+
+  const closeEditer = () => {
+    setEditingTask(null);
+  };
+
+  const edit = () => {
+    editTask(editingTask, editedTaskValue);
+    closeEditer();
+  };
+
   return (
-    <ol className={styles.list}>
-      {toDoList.map(({ id, title }) => (
-        <li className={styles.item} key={id}>
-          {title}
-        </li>
-      ))}
-    </ol>
+    <>
+      {
+        <TodolistLayout
+          isLoading={isLoading}
+          filteredList={filteredList}
+          onClick={onClick}
+          callForm={callForm}
+        />
+      }
+      {editingTask && (
+        <EditingForm
+          edit={edit}
+          editedTaskValue={editedTaskValue}
+          setEditedTaskValue={setEditedTaskValue}
+          closeEditer={closeEditer}
+          editingTask={editingTask}
+          setEditingTask={setEditingTask}
+        />
+      )}
+    </>
   );
 };

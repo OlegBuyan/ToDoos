@@ -1,0 +1,30 @@
+.sharedBtn {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 5px;
+}
+.sharedBtn:hover {
+  background-color: #0056b3;
+}
+.sharedInput {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  background-color: #fff;
+  color: #333;
+  margin: 5px;
+}
+
+.sharedInput:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
